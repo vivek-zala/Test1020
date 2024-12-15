@@ -1,4 +1,4 @@
-package Test1020;
+package Test1020.java_code;
 
 public class Hello {
     public static void main(String ...args) {
