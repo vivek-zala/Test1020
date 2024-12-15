@@ -21,7 +21,7 @@ jobs:
     - name: Set up latest JDK
       uses: actions/setup-java@v3
       with:
-        java-version: 'latest'  # This will automatically pick the latest stable version of Java
+        java-version: 22  # This will automatically pick the latest stable version of Java
         distribution: 'temurin' # Using the Temurin distribution (AdoptOpenJDK's successor)
 
     - name: Check java version
