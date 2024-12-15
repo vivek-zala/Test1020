@@ -1,9 +1,6 @@
 name: Test Java Compilation
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -24,9 +21,17 @@ jobs:
         java-version: 22  # This will automatically pick the latest stable version of Java
         distribution: 'temurin' # Using the Temurin distribution (AdoptOpenJDK's successor)
 
-    - name: Check java version
-      run: java --version
-    # Compile Java code
-    - name: Compile Java code
+        # Compile Java code
+    - name: Compile all Java files
       run: |
-        java *.java
+        javac -d out java_code/*.java
+
+
+    - name: Run all Java files
+      run: |
+        for class_file in out/java/*.class; do
+          class_name=$(basename "$class_file" .class)
+          if javap -public "$class_file" | grep -q 'public static void main'; then
+            java -cp out java_code.$class_name
+          fi
+        done
