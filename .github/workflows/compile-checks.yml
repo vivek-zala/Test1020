@@ -1,0 +1,32 @@
+name: Test Java Compilation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up the latest JDK using Temurin (AdoptOpenJDK's successor)
+    - name: Set up latest JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: 22  # This will automatically pick the latest stable version of Java
+        distribution: 'temurin' # Using the Temurin distribution (AdoptOpenJDK's successor)
+
+    - name: Check java version
+      run: java --version
+    # Compile Java code
+    - name: Compile Java code
+      run: |
+        java *.java
