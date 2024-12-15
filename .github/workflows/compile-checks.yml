@@ -29,5 +29,5 @@ jobs:
           class_name = ${basename "class_file" .java}
           echo "Executing $class_name"
           echo
-          java java_code.$class_name
+          java Test1020.java_code.$class_name
         done
