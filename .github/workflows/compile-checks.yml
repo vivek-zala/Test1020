@@ -26,4 +26,4 @@ jobs:
     # Compile Java code
     - name: Compile Java code
       run: |
-        java Test1020\java_code\*.java
+        java java_code\*.java
