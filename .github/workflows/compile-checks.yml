@@ -22,12 +22,16 @@ jobs:
         distribution: 'temurin' # Using the Temurin distribution (AdoptOpenJDK's successor)
 
         # Compile Java code
-    - name: Compile Java code
+    - name: Compile all Java files
       run: |
-        # java java_code/*.java
-        for class_files in javacode/*.java; do
-          class_name=${basename "class_file"%.java}
-          echo "Executing $class_name"
-          echo
-          java Test1020.java_code.$class_files
+        javac -d out java_code/*.java
+
+
+    - name: Run all Java files
+      run: |
+        for class_file in out/java/*.class; do
+          class_name=$(basename "$class_file" .class)
+          if javap -public "$class_file" | grep -q 'public static void main'; then
+            java -cp out java_code.$class_name
+          fi
         done
